@@ -9,27 +9,18 @@ const { json } = require('body-parser');
 import { buildSchema } from 'type-graphql';
 import { HelloResolver } from './resolvers/hello';
 import { PostResolver } from './resolvers/post';
+import { UserResolver } from './resolvers/user';
 
 const main = async () => {
   const orm = await MikroORM.init(mikroConfig);
   await orm.getMigrator().up();
-  // const emFork = orm.em.fork();
-  // const post = emFork.create(Post, {
-  //   title: 'my first post',
-  //   createdAt: '',
-  //   updatedAt: '',
-  // });
-  // await emFork.persistAndFlush(post);
-
-  // const posts = await emFork.find(Post, {});
-  // console.log(posts);
   const fork = orm.em.fork();
 
   const app = express();
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [HelloResolver, PostResolver],
+      resolvers: [HelloResolver, PostResolver, UserResolver],
       validate: false,
     }),
   });
