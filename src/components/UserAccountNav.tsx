@@ -61,7 +61,7 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
             });
           }}
         >
-          Sign out
+          Cerrar Sesión
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
